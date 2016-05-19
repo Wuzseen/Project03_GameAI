@@ -6,7 +6,6 @@ import java.util.List;
 import ch.idsia.agents.controllers.BehaviorTreeAgent;
 
 public class Selector extends Task {
-	
 	public List<Task> selectorTasks;
 	
 	public Selector(){
@@ -21,6 +20,7 @@ public class Selector extends Task {
 		this.selectorTasks.add(t);
 	}
 
+	// Selectors return on the first node that evaluates true so they only execute the node that was true
 	@Override
 	public Boolean run(BehaviorTreeAgent marioAgent) {
 		for(Task t : this.selectorTasks) {
@@ -30,5 +30,4 @@ public class Selector extends Task {
 		}
 		return false;
 	}
-
 }

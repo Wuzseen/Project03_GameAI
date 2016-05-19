@@ -21,6 +21,7 @@ public class Sequence extends Task {
 		this.sequenceTasks.add(t);
 	}
 
+	// Sequences end on the first node that returns false otherwise they completely execute all the tasks
 	@Override
 	public Boolean run(BehaviorTreeAgent marioAgent) {
 		for(Task t : this.sequenceTasks) {
