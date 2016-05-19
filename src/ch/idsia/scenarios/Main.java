@@ -28,7 +28,7 @@
 package ch.idsia.scenarios;
 
 import ch.idsia.agents.Agent;
-import ch.idsia.agents.controllers.ForwardAgent;
+import ch.idsia.agents.controllers.*;
 import ch.idsia.benchmark.tasks.BasicTask;
 import ch.idsia.tools.MarioAIOptions;
 
@@ -43,7 +43,7 @@ public static void main(String[] args)
 //        final String argsString = "-vis on";
     final MarioAIOptions marioAIOptions = new MarioAIOptions(args);
 //        final Environment environment = new MarioEnvironment();
-        final Agent agent = new ForwardAgent();
+        final Agent agent = new DayTimAgent();
 //        final Agent agent = marioAIOptions.getAgent();
 //        final Agent a = AgentsPool.loadAgent("ch.idsia.controllers.agents.controllers.ForwardJumpingAgent");
     marioAIOptions.setAgent(agent);
