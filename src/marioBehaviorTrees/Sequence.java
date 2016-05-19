@@ -17,7 +17,7 @@ public class Sequence extends Task {
 		this.sequenceTasks = givenTasks;
 	}
 	
-	public void AddSequenceTask(Task t) {
+	public void AddTask(Task t) {
 		this.sequenceTasks.add(t);
 	}
 

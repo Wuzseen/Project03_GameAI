@@ -191,4 +191,12 @@ public int getReceptiveFieldCellValue(int x, int y)
 //        getKillsByStomp = marioState[8];
 //        getKillsByShell = marioState[9];
 //    }
+
+	public int getMarioEgoRow() {
+		return marioEgoRow;
+	}
+	
+	public int getMarioEgoCol() {
+		return marioEgoCol;
+	}
 }

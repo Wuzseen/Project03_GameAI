@@ -16,7 +16,7 @@ public class Selector extends Task {
 		this.selectorTasks = givenTasks;
 	}
 	
-	public void AddSelectorTask(Task t) {
+	public void AddTask(Task t) {
 		this.selectorTasks.add(t);
 	}
 
