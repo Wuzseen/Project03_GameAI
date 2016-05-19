@@ -32,15 +32,10 @@ import ch.idsia.benchmark.mario.engine.sprites.Mario;
 import ch.idsia.benchmark.mario.environments.Environment;
 import marioBehaviorTrees.*;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Sergey Karakovskiy, sergey.karakovskiy@gmail.com
- * Date: Apr 8, 2009
- * Time: 4:03:46 AM
- */
 
 public class BehaviorTreeAgent extends BasicMarioAIAgent implements Agent
 {
+	private Boolean doShoot = false;
 	int trueJumpCounter = 0;
 	int trueSpeedCounter = 0;
 	Task behaviorTree;
@@ -60,22 +55,14 @@ public class BehaviorTreeAgent extends BasicMarioAIAgent implements Agent
 	    trueSpeedCounter = 0;
 	}
 	
-	private boolean DangerOfAny()
-	{
-	
-	        if ((getReceptiveFieldCellValue(getMarioEgoRow() + 2, getMarioEgoCol() + 1) == 0 &&
-	            getReceptiveFieldCellValue(getMarioEgoRow() + 1, getMarioEgoCol() + 1) == 0) ||
-	            getReceptiveFieldCellValue(getMarioEgoRow(), getMarioEgoCol() + 1) != 0 ||
-	            getReceptiveFieldCellValue(getMarioEgoRow(), getMarioEgoCol() + 2) != 0 ||
-	            getEnemiesCellValue(getMarioEgoRow(), getMarioEgoCol() + 1) != 0 ||
-	            getEnemiesCellValue(getMarioEgoRow(), getMarioEgoCol() + 2) != 0)
-	            return true;
-	        else
-	            return false;
-	}
-	
 	public boolean[] getAction()
 	{
+		if(doShoot) {
+			action[Mario.KEY_SPEED] = true;
+			doShoot = false;
+		} else {
+			action[Mario.KEY_SPEED] = false;
+		}
 		behaviorTree.run(this);
 	    return action;
 	}
@@ -95,6 +82,21 @@ public class BehaviorTreeAgent extends BasicMarioAIAgent implements Agent
 	
 	public void jump() {
 		action[Mario.KEY_JUMP] = isMarioAbleToJump || !isMarioOnGround;
+	}
+	
+	public void resetJump() {
+		action[Mario.KEY_JUMP] = false;
+	}
+	
+	public void shoot(Boolean on) {
+		//action[Mario.KEY_SPEED] = on && this.isMarioAbleToShoot;
+		doShoot = on && this.isMarioAbleToShoot;
+	}
+	
+	public void stop() {
+		action[Mario.KEY_LEFT] = false;
+		action[Mario.KEY_RIGHT] = false;
+		
 	}
 	
 	public Boolean isMarioOnGround() {

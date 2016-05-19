@@ -127,7 +127,7 @@ public static Level createLevel(MarioAIOptions args)
     levelType = args.getLevelType();
     try
     {
-        levelSeed = args.getLevelRandSeed() + levelType + 326;
+        levelSeed = args.getLevelRandSeed() + levelType;
     } catch (Exception e)
     {
         loadLevel(args.getParameterValue("-ls"));
