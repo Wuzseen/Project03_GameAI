@@ -38,12 +38,12 @@ import ch.idsia.benchmark.mario.environments.Environment;
  * Time: 4:03:46 AM
  */
 
-public class DayTimAgent extends BasicMarioAIAgent implements Agent
+public class BehaviorTreeAgent extends BasicMarioAIAgent implements Agent
 {
 	int trueJumpCounter = 0;
 	int trueSpeedCounter = 0;
 	
-	public DayTimAgent()
+	public BehaviorTreeAgent()
 	{
 	    super("DayTimAgent");
 	    reset();
@@ -97,5 +97,10 @@ public class DayTimAgent extends BasicMarioAIAgent implements Agent
 	    }
 	    
 	    return action;
+	}
+	
+	public void moveRight(Boolean on)
+	{
+		action[Mario.KEY_RIGHT] = on;
 	}
 }
