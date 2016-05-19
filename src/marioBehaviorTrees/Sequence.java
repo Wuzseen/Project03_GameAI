@@ -7,7 +7,7 @@ import ch.idsia.agents.controllers.BehaviorTreeAgent;
 
 public class Sequence extends Task {
 	
-	public List<Task> sequenceTasks;
+	protected List<Task> sequenceTasks;
 	
 	public Sequence(){
 		this.sequenceTasks = new ArrayList<Task>();

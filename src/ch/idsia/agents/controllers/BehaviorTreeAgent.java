@@ -30,6 +30,7 @@ package ch.idsia.agents.controllers;
 import ch.idsia.agents.Agent;
 import ch.idsia.benchmark.mario.engine.sprites.Mario;
 import ch.idsia.benchmark.mario.environments.Environment;
+import marioBehaviorTrees.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -42,18 +43,19 @@ public class BehaviorTreeAgent extends BasicMarioAIAgent implements Agent
 {
 	int trueJumpCounter = 0;
 	int trueSpeedCounter = 0;
+	Task behaviorTree;
 	
 	public BehaviorTreeAgent()
 	{
-	    super("DayTimAgent");
+	    super("BehaviorTreeAgent");
 	    reset();
+	    TreeFactory fact = new TreeFactory();
+	    behaviorTree = fact.defaultMarioBehaviorTree();
 	}
 	
 	public void reset()
 	{
 	    action = new boolean[Environment.numberOfKeys];
-	    action[Mario.KEY_RIGHT] = true;
-	    action[Mario.KEY_SPEED] = true;
 	    trueJumpCounter = 0;
 	    trueSpeedCounter = 0;
 	}
@@ -74,33 +76,28 @@ public class BehaviorTreeAgent extends BasicMarioAIAgent implements Agent
 	
 	public boolean[] getAction()
 	{
-	    // this Agent requires observation integrated in advance.
-	
-	    if (DangerOfAny() && getReceptiveFieldCellValue(marioEgoRow, marioEgoCol + 1) != 1)  // a coin
-	    {
-	        if (isMarioAbleToJump || (!isMarioOnGround && action[Mario.KEY_JUMP]))
-	        {
-	            action[Mario.KEY_JUMP] = true;
-	        }
-	        ++trueJumpCounter;
-	    }
-	    else
-	    {
-	        action[Mario.KEY_JUMP] = false;
-	        trueJumpCounter = 0;
-	    }
-	
-	    if (trueJumpCounter > 16)
-	    {
-	        trueJumpCounter = 0;
-	        action[Mario.KEY_JUMP] = false;
-	    }
-	    
+		behaviorTree.run(this);
 	    return action;
 	}
 	
 	public void moveRight(Boolean on)
 	{
 		action[Mario.KEY_RIGHT] = on;
+	}
+	
+	public void moveLeft(Boolean on) {
+		action[Mario.KEY_LEFT] = on;
+	}
+	
+	public void hop() {
+		action[Mario.KEY_JUMP] = isMarioAbleToJump;
+	}
+	
+	public void jump() {
+		action[Mario.KEY_JUMP] = isMarioAbleToJump || !isMarioOnGround;
+	}
+	
+	public Boolean isMarioOnGround() {
+		return this.isMarioOnGround;
 	}
 }

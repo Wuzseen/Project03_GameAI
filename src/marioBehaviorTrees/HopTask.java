@@ -1,11 +1,11 @@
 package marioBehaviorTrees;
 
-import ch.idsia.agents.controllers.*;
+import ch.idsia.agents.controllers.BehaviorTreeAgent;
 
-public class MoveRightTask extends Task {
+public class HopTask extends Task {
 	@Override
 	public Boolean run(BehaviorTreeAgent marioAgent) {
-		marioAgent.moveRight(true);
+		marioAgent.hop();
 		return true;
 	}
 }
