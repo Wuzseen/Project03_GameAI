@@ -7,7 +7,7 @@ public class IsEnemyInShootRange extends Task {
 	@Override
 	public Boolean run(BehaviorTreeAgent marioAgent) {
 		// TODO Auto-generated method stub
-		int xdist = 5;
+		int xdist = 4;
 		int egoCol = marioAgent.getMarioEgoCol();
 		int egoRow = marioAgent.getMarioEgoRow();
 		//for(int z = egoRow)
